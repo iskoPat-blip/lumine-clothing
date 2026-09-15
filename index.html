@@ -429,7 +429,295 @@
                 gap: 10px;
             }
 
-        }
+        /* =========================
+   PRODUCT WINDOW
+========================= */
+
+.product-modal {
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    z-index: 2000;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.product-modal.active {
+    display: flex;
+}
+
+
+.product-box {
+
+    width: 100%;
+    max-width: 900px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #111;
+
+    border: 1px solid #333;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    position: relative;
+
+}
+
+
+.product-large-image {
+
+    min-height: 500px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b1b1b,
+            #080808
+        );
+
+    font-size: 150px;
+
+}
+
+
+.product-details {
+
+    padding: 45px;
+
+}
+
+
+.close-product {
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #444;
+
+    background: #111;
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+}
+
+
+.close-product:hover {
+
+    background: white;
+
+    color: black;
+
+}
+
+
+.product-details h2 {
+
+    font-size: 45px;
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+
+    margin: 15px 0;
+
+}
+
+
+.product-description {
+
+    color: #999;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    margin: 25px 0;
+
+}
+
+
+.option-title {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-top: 25px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.option-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+.option-button {
+
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid #444;
+
+    padding: 12px 16px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+}
+
+
+.option-button:hover,
+
+.option-button.selected {
+
+    background: white;
+
+    color: black;
+
+    border-color: white;
+
+}
+
+
+.quantity-selector {
+
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid #444;
+
+    width: fit-content;
+
+}
+
+
+.quantity-selector button {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+}
+
+
+.quantity-selector span {
+
+    width: 45px;
+
+    text-align: center;
+
+}
+
+
+.add-cart-button {
+
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 17px;
+
+    border: none;
+
+    background: white;
+
+    color: black;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+
+.add-cart-button:hover {
+
+    background: #ccc;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .product-box {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .product-large-image {
+
+        min-height: 300px;
+
+    }
+
+
+    .product-details {
+
+        padding: 25px;
+
+    }
+
+}
 
     </style>
 
@@ -810,17 +1098,341 @@
 
 <script>
 
-    function showProduct(productName) {
+ let selectedColor = "BLACK";
+let selectedSize = "M";
+let productQuantity = 1;
 
-        alert(
-            productName +
-            "\n\n" +
-            "Product page coming next."
-        );
+function showProduct(productName) {
 
+    const modal = document.getElementById("productModal");
+    const name = document.getElementById("modalName");
+    const code = document.getElementById("modalCode");
+    const price = document.getElementById("modalPrice");
+    const description = document.getElementById("modalDescription");
+    const image = document.getElementById("modalImage");
+
+    if (productName === "Essential Tee") {
+
+        code.innerText = "LUMINE // 001";
+        name.innerText = "Essential Tee";
+        price.innerText = "₱599 — ₱899";
+
+        description.innerText =
+            "A clean everyday staple built around " +
+            "a relaxed streetwear silhouette. " +
+            "Designed for comfort, layering and " +
+            "effortless neutral styling.";
+
+        image.innerText = "👕";
     }
 
-</script>
+    if (productName === "Afterdark Hoodie") {
+
+        code.innerText = "LUMINE // 002";
+        name.innerText = "Afterdark Hoodie";
+        price.innerText = "₱899 — ₱1,499";
+
+        description.innerText =
+            "A heavyweight-inspired hoodie with " +
+            "a relaxed fit and muted palette. " +
+            "Built for late nights, cold mornings " +
+            "and everyday rotation.";
+
+        image.innerText = "🧥";
+    }
+
+    selectedColor = "BLACK";
+    selectedSize = "M";
+    productQuantity = 1;
+
+    document.getElementById("quantity").innerText = "1";
+
+    modal.classList.add("active");
+}
+
+
+function closeProduct() {
+
+    document
+        .getElementById("productModal")
+        .classList.remove("active");
+}
+
+
+function selectColor(button) {
+
+    const buttons =
+        button.parentElement.querySelectorAll(".option-button");
+
+    buttons.forEach(function(button) {
+        button.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    selectedColor = button.innerText.trim();
+}
+
+
+function selectSize(button) {
+
+    const buttons =
+        button.parentElement.querySelectorAll(".option-button");
+
+    buttons.forEach(function(button) {
+        button.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    selectedSize = button.innerText.trim();
+}
+
+
+function changeQuantity(amount) {
+
+    productQuantity += amount;
+
+    if (productQuantity < 1) {
+        productQuantity = 1;
+    }
+
+    if (productQuantity > 20) {
+        productQuantity = 20;
+    }
+
+    document
+        .getElementById("quantity")
+        .innerText = productQuantity;
+}
+
+
+function addToCart() {
+
+    const product =
+        document.getElementById("modalName").innerText;
+
+    alert(
+        product +
+        "\n\n" +
+        "Color: " + selectedColor +
+        "\n" +
+        "Size: " + selectedSize +
+        "\n" +
+        "Quantity: " + productQuantity +
+        "\n\n" +
+        "Added to cart!"
+    );
+
+    closeProduct();
+}
+
+</script> 
+
+    <!-- =========================
+     PRODUCT WINDOW
+========================= -->
+
+<div class="product-modal" id="productModal">
+
+    <div class="product-box">
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            class="close-product"
+            onclick="closeProduct()"
+        >
+            ×
+        </button>
+
+
+        <!-- PRODUCT IMAGE -->
+
+        <div
+            class="product-large-image"
+            id="modalImage"
+        >
+            👕
+        </div>
+
+
+        <!-- PRODUCT DETAILS -->
+
+        <div class="product-details">
+
+            <div
+                class="product-code"
+                id="modalCode"
+            >
+                LUMINE // 001
+            </div>
+
+
+            <h2 id="modalName">
+                Essential Tee
+            </h2>
+
+
+            <div
+                class="product-price"
+                id="modalPrice"
+            >
+                ₱599 — ₱899
+            </div>
+
+
+            <p
+                class="product-description"
+                id="modalDescription"
+            >
+                A clean everyday staple built around
+                a relaxed streetwear silhouette.
+                Designed for comfort, layering and
+                effortless neutral styling.
+            </p>
+
+
+            <!-- COLOR -->
+
+            <div class="option-title">
+                COLOR
+            </div>
+
+            <div class="option-buttons">
+
+                <button
+                    class="option-button selected"
+                    onclick="selectColor(this)"
+                >
+                    BLACK
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectColor(this)"
+                >
+                    OFF-WHITE
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectColor(this)"
+                >
+                    CHARCOAL
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectColor(this)"
+                >
+                    STONE
+                </button>
+
+            </div>
+
+
+            <!-- SIZE -->
+
+            <div class="option-title">
+                SIZE
+            </div>
+
+            <div class="option-buttons">
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    XXS
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    XS
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    S
+                </button>
+
+                <button
+                    class="option-button selected"
+                    onclick="selectSize(this)"
+                >
+                    M
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    L
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    XL
+                </button>
+
+                <button
+                    class="option-button"
+                    onclick="selectSize(this)"
+                >
+                    XXL
+                </button>
+
+            </div>
+
+
+            <!-- QUANTITY -->
+
+            <div class="option-title">
+                QUANTITY
+            </div>
+
+            <div class="quantity-selector">
+
+                <button
+                    onclick="changeQuantity(-1)"
+                >
+                    −
+                </button>
+
+                <span id="quantity">
+                    1
+                </span>
+
+                <button
+                    onclick="changeQuantity(1)"
+                >
+                    +
+                </button>
+
+            </div>
+
+
+            <!-- ADD TO CART -->
+
+            <button
+                class="add-cart-button"
+                onclick="addToCart()"
+            >
+                ADD TO CART
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 </body>
